@@ -72,10 +72,13 @@ public class NetworkConnector {
 
     private void send(){
       //buralara gonderme yapilacak
+        //data byte ların arraylik eleman olarak gonderilmelerini sagliycak
+        udpSender.send(new byte[0]);
     }
 
     private void receive(){
      //alma islemleri yapilacak
+        byte [] data = udpReceiver.receive();
     }
 
 

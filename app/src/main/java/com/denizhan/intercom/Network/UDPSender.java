@@ -27,7 +27,7 @@ public class UDPSender {
         }
     }
 
-    private void send(byte[] data){
+    public void send(byte[] data){
 
         // paketi veri boyutuna göre guncelle
         sendingPacket = new DatagramPacket(data, data.length, local_address, 4004);
