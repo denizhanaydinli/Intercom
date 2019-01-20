@@ -1,6 +1,6 @@
 package com.denizhan.intercom.Media;
 import android.media.MediaRecorder;
-import com.external.test.Interfaces.ActivityMediaInteractionInterface;
+import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
 import java.io.IOException;
 
 public class CustomAudioRecorder implements ActivityMediaInteractionInterface {

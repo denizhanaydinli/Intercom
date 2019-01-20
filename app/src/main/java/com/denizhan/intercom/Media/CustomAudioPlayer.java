@@ -1,13 +1,14 @@
 package com.denizhan.intercom.Media;
 
 import android.media.MediaPlayer;
-import com.external.test.Interfaces.ActivityMediaInteractionInterface;
+import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
 
 import java.io.IOException;
 
 public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
 
     private MediaPlayer player; // Android'in kendi medya oynatıcısı
+    public boolean playing;
 
     public CustomAudioPlayer()
     {
@@ -32,17 +33,20 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
     public void start()
     {
         player.start(); // Oynatmayı başlat
+        playing = true;
     }
 
     @Override
     public void stop()
     {
         player.stop(); // Oynatmayı durdur
+        playing = false;
     }
 
     @Override
     public void destroy()
     {
         player.release(); // MediaPlayer objesini ve kullandığı kaynakları temizle
+        playing = false;
     }
 }
