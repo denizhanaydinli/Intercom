@@ -3,7 +3,7 @@ package com.denizhan.intercom;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
+//Denizhan
 public class MainActivity extends AppCompatActivity {
 
     @Override
