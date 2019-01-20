@@ -12,10 +12,21 @@ import com.external.test.Interfaces.ActivityMediaInteractionInterface;
 public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface {
 
     private AudioRecord audioRecord; // ses kaydı için gerekli android classı
+    private Thread recordingThread = null;
+    private Runnable recordingRunnable = null;
+    private boolean recording = false;
 
     public RealtimeAudioCapturer(){
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, 2000);
-        // 8000 hertz de 16 bit çözünürlüğünde tek kanalda kayıt yap, buffer boyutu 2000
+        // 8000 hertz de 16 bit çözünürlüğünde tek kanalda kayıt yap, buffer boyutu 2000 olsun
+        recordingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                while(recording){
+                    captureAudio();
+                }
+            }
+        };
     }
 
     @Override
@@ -26,18 +37,37 @@ public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface 
     @Override
     public void start() {
         // kayda başla
-        audioRecord.startRecording();
+        if(audioRecord != null && !recording){
+            audioRecord.startRecording();
+            recording = true;
+            recordingThread = new Thread(recordingRunnable);
+            recordingThread.start();
+        }
     }
 
     @Override
     public void stop() {
         // kaydı durdur
-        audioRecord.stop();
+        if(audioRecord != null && recording){
+            audioRecord.stop();
+            recording = false;
+            recordingThread = null;
+        }
     }
 
     @Override
     public void destroy() {
         // kaydı kapa
-        audioRecord.release();
+        stop();
+        if(audioRecord != null && !recording) {
+            audioRecord.release();
+            recording = false;
+            recordingThread = null;
+        }
+    }
+
+    public void captureAudio(){
+        byte[] buffer = new byte[2000];
+        audioRecord.read(buffer, 0, 2000); // buffer boyutu kadar ses oku
     }
 }
