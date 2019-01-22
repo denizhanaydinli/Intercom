@@ -1,14 +1,14 @@
 package com.denizhan.intercom.Media;
-//deneme
+
 import android.media.MediaPlayer;
 import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
-
 import java.io.IOException;
 
 public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
 
     private MediaPlayer player; // Android'in kendi medya oynatıcısı
-    public boolean playing;
+    public boolean playing; // Oynuyor mu oynamıyor mu anlamak için boolean
+    private String FILE_PATH = "/storage/emulated/0/sample.3gp"; // Dosya yolu
 
     public CustomAudioPlayer()
     {
@@ -20,7 +20,7 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
     {
         try
         {
-            player.setDataSource("/storage/emulated/0/sample.3gp"); // Oynatılacak dosyayı seç
+            player.setDataSource(FILE_PATH); // Oynatılacak dosyayı seç
             player.prepare(); // Oynatma için hazırlan
         }
         catch (IOException e)
@@ -48,5 +48,10 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
     {
         player.release(); // MediaPlayer objesini ve kullandığı kaynakları temizle
         playing = false;
+    }
+
+    public void setFilePath(String path)
+    {
+        FILE_PATH = path; // Dosya yolunu değiştir
     }
 }
