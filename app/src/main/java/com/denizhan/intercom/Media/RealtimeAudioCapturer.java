@@ -14,6 +14,7 @@ public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface 
     private Thread recordingThread = null;
     private Runnable recordingRunnable = null;
     private boolean recording = false;
+    public static byte[] BUFFER = new byte[0];
 
     public RealtimeAudioCapturer(){
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, 2000);
@@ -66,7 +67,7 @@ public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface 
     }
 
     public void captureAudio(){
-        byte[] buffer = new byte[2000];
-        audioRecord.read(buffer, 0, 2000); // buffer boyutu kadar ses oku
+        RealtimeAudioCapturer.BUFFER = new byte[2000]; // güncelle
+        audioRecord.read(RealtimeAudioCapturer.BUFFER, 0, 2000); // buffer boyutu kadar ses oku
     }
 }
