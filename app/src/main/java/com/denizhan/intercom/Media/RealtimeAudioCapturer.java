@@ -3,11 +3,11 @@
     Açıklama: Gerçek zamanlı olarak mikrofondan sesi byte formatında alıp hazır hale getirmek
 */
 package com.denizhan.intercom.Media;
-package com.external.test.Media;
+
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import com.external.test.Interfaces.ActivityMediaInteractionInterface;
+import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
 
 public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface {
 
