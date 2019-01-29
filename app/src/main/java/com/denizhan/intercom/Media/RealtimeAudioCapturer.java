@@ -6,6 +6,7 @@ package com.denizhan.intercom.Media;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.util.Log;
 import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
 
 public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface {
@@ -59,6 +60,12 @@ public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface 
     public void destroy() {
         // kaydı kapa
         stop();
+        release();
+        audioRecord = null;
+    }
+
+    public void release(){
+        stop();
         if(audioRecord != null && !recording) {
             audioRecord.release();
             recording = false;
@@ -69,5 +76,6 @@ public class RealtimeAudioCapturer implements ActivityMediaInteractionInterface 
     public void captureAudio(){
         RealtimeAudioCapturer.BUFFER = new byte[2000]; // güncelle
         audioRecord.read(RealtimeAudioCapturer.BUFFER, 0, 2000); // buffer boyutu kadar ses oku
+        Log.e("***", "read audio");
     }
 }
