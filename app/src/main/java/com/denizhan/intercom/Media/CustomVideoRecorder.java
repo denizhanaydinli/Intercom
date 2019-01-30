@@ -17,7 +17,7 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
     private Camera camera; // video kamerası
     private SurfaceView surface_view; // video kaydedilirken gösterileceği zemin
     private boolean previewing = false;
-    public boolean recording = false;
+    private boolean recording = false;
     public String path = "/storage/emulated/0/video.mp4"; // videonun dosya ismi
     public CustomVideoRecorder(SurfaceView surfaceview){
         this.media_recorder = new MediaRecorder();
@@ -27,7 +27,6 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
     @Override
     public void prepare() {
         stopPreview(); // eğer preview yapıyorsa durdur
-        this.camera.unlock();
         this.camera = Camera.open(1); // ön kamerayı aç
         this.camera.unlock();
         this.media_recorder.setCamera(this.camera); // video kaydedicinin kamera kaynağını belirle
