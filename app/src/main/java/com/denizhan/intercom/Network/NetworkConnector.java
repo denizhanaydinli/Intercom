@@ -83,19 +83,28 @@ public class NetworkConnector {
 
     public enum COMMANDS
     {
-        SEND_AUDIO("send_audio"),
-        END_AUDIO("end_audio");
 
-        private final String name;
+            SEND_AUDIO("send_audio"),
+            END_AUDIO("end_audio"),
 
-        COMMANDS(String s) {
-            name = s;
+            CHECK_UPDATES("check_updates"),
+
+            SEND_VIDEO("send_video"),
+            END_VIDEO("end_video"),
+
+            OPEN_LOCK("open_lock");
+
+            private final String type;
+            COMMANDS(String str) {
+                type = str;
+            }
+
+
+            public String toString() {
+                return this.type;
+            }
         }
 
-        public String toString() {
-            return this.name;
-        }
-    }
 
 
 }
