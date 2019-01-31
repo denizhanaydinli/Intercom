@@ -1,11 +1,12 @@
 package com.denizhan.intercom.Media;
 import android.media.MediaRecorder;
-import com.external.test.Interfaces.ActivityMediaInteractionInterface;
+import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
 import java.io.IOException;
-
 public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
 
     private MediaRecorder recorder; // Android'in kendi medya kaydedicisi
+    public boolean recording; // Kaydedip kaydetmediğini anlamak için boolean
+    private String FILE_PATH = "/storage/emulated/0/sample.3gp"; // Dosya yolu
 
     public CustomAudioRecorder()
     {
@@ -20,7 +21,7 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
     @Override
     public void prepare()
     {
-        recorder.setOutputFile("/storage/emulated/0/sample.3gp"); // Dosyanın kaydedileceği yeri seç
+        recorder.setOutputFile(FILE_PATH); // Dosyanın kaydedileceği yeri seç
         try
         {
             recorder.prepare(); // Kayıt için hazırlan
@@ -35,17 +36,25 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
     public void start()
     {
         recorder.start(); // Kayda başla
+        recording = true;
     }
 
     @Override
     public void stop()
     {
         recorder.stop(); // Kaydı durdur
+        recording = false;
     }
 
     @Override
     public void destroy()
     {
         recorder.release(); // MediaRecorder objesini ve kullandığı kaynakları temizle
+        recording = false;
+    }
+
+    public void setFilePath(String path)
+    {
+        FILE_PATH = path; // Dosya yolunu değiştir
     }
 }

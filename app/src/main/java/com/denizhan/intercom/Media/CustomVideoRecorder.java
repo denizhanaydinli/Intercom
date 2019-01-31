@@ -17,6 +17,7 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
     private Camera camera; // video kamerası
     private SurfaceView surface_view; // video kaydedilirken gösterileceği zemin
     private boolean previewing = false;
+    private boolean recording = false;
     public String path = "/storage/emulated/0/video.mp4"; // videonun dosya ismi
     public CustomVideoRecorder(SurfaceView surfaceview){
         this.media_recorder = new MediaRecorder();
@@ -26,7 +27,6 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
     @Override
     public void prepare() {
         stopPreview(); // eğer preview yapıyorsa durdur
-        //this.camera.unlock();
         this.camera = Camera.open(1); // ön kamerayı aç
         this.camera.unlock();
         this.media_recorder.setCamera(this.camera); // video kaydedicinin kamera kaynağını belirle
@@ -45,23 +45,42 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
 
     @Override
     public void start() {
-        this.media_recorder.start(); // kayda başla
+        if(this.media_recorder != null) {
+            this.media_recorder.start(); // kayda başla
+            this.recording = true;
+        }
     }
 
     @Override
     public void stop() {
-        this.media_recorder.stop(); // kaydı bitir
-        this.camera.lock();
-        this.camera.release();
+        if (this.media_recorder != null) {
+            this.media_recorder.stop(); // kaydı bitir
+            this.recording = false;
+        }
+        if (this.camera != null) {
+            this.camera.lock();
+            this.camera.release();
+        }
     }
 
     @Override
     public void destroy() {
-        this.media_recorder.release(); // kaydediciyi sil
+        if(this.media_recorder != null) {
+            this.media_recorder.release(); // kaydediciyi sil
+            this.recording = false;
+        }
+        if(this.camera != null) { // kamerayı sil
+            this.camera.lock();
+            this.camera.release();
+            this.previewing = false;
+        }
     }
 
     public void startPreview(){
         try {
+            if(isRecording()){ // eğer kayıttaysa durdur
+                stop();
+            }
             this.camera = Camera.open(1); // ön kamerayı aç
             this.camera.setPreviewDisplay(this.surface_view.getHolder()); // oynatma yüzeyini belirle
             this.camera.startPreview(); // previewi başlat
@@ -71,13 +90,18 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
         }
     }
 
-    public void stopPreview(){
-        this.camera.stopPreview(); // previewi durdur
-        this.camera.release(); // kamerayı kapat
-        this.previewing = false;
+    public void stopPreview() {
+        if (isPreviewing()) {
+            this.camera.stopPreview(); // previewi durdur
+            this.camera.release(); // kamerayı kapat
+            this.previewing = false;
+        }
     }
 
     public boolean isPreviewing(){
         return this.previewing; // preview yapıyor mu yapmıyor mu anlamak için boolean döndür
+    }
+    public boolean isRecording(){
+        return this.recording; // kayıt yapıyor mu yapmıyor mu anlamak için boolean döndür
     }
 }
