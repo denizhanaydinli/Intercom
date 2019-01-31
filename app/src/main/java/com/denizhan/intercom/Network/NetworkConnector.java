@@ -81,6 +81,21 @@ public class NetworkConnector {
         byte [] data = udpReceiver.receive();
     }
 
+    public enum COMMANDS
+    {
+        SEND_AUDIO("send_audio"),
+        END_AUDIO("end_audio");
+
+        private final String name;
+
+        COMMANDS(String s) {
+            name = s;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+    }
 
 
 }
