@@ -12,6 +12,7 @@ public class CustomVideoPlayer implements ActivityMediaInteractionInterface {
     private MediaPlayer media_player;
     private SurfaceView surface_view;
     public String path = "/storage/emulated/0/video.mp4"; // videonun dosya ismi
+    private boolean playing = false;
 
     public CustomVideoPlayer(){
         this.media_player = new MediaPlayer();
@@ -35,6 +36,7 @@ public class CustomVideoPlayer implements ActivityMediaInteractionInterface {
     public void start() {
         if(this.media_player != null){
             this.media_player.start();
+            this.playing = true;
         }
 
     }
@@ -43,6 +45,7 @@ public class CustomVideoPlayer implements ActivityMediaInteractionInterface {
     public void stop() {
         if(this.media_player != null){
             this.media_player.stop();
+            this.playing = false;
         }
 
     }
