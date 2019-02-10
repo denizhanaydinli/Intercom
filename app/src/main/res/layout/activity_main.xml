@@ -7,6 +7,251 @@
     tools:context=".MainActivity">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/audio_layout"
+        android:layout_width="match_parent"
+        android:layout_height="423dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/record_audio_button"
+            android:layout_width="310dp"
+            android:layout_height="387dp"
+            android:layout_marginTop="1dp"
+            android:elevation="0dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:scaleType="fitStart"
+            android:text="kaydet"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/audio_amplitude_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="241dp"
+            android:layout_height="16dp"
+            android:layout_marginBottom="64dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/record_audio_button"
+            app:layout_constraintEnd_toStartOf="@+id/record_audio_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/record_audio_button" />
+
+        <ProgressBar
+            android:id="@+id/audio_remaining_time_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="241dp"
+            android:layout_height="16dp"
+            android:layout_marginBottom="68dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/record_audio_button"
+            app:layout_constraintEnd_toStartOf="@+id/record_audio_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/record_audio_button" />
+
+        <TextView
+            android:id="@+id/audio_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="90dp"
+            android:text="PRESS TO START RECORDING AUDIO"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/record_audio_button"
+            app:layout_constraintEnd_toStartOf="@+id/record_audio_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/record_audio_button" />
+
+        <Button
+            android:id="@+id/send_audio_button"
+            android:layout_width="82dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            android:text="gönder"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/record_audio_button"
+            app:layout_constraintEnd_toEndOf="@+id/record_audio_button" />
+
+        <Button
+            android:id="@+id/cancel_audio_button"
+            android:layout_width="81dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            android:text="iptal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/record_audio_button"
+            app:layout_constraintStart_toStartOf="@+id/record_audio_button" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="423dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/video_layout_bottom"
+            android:layout_width="290dp"
+            android:layout_height="373.3dp"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></android.support.constraint.ConstraintLayout>
+
+        <SurfaceView
+            android:id="@+id/video_surface"
+            android:layout_width="260dp"
+            android:layout_height="346.6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/cancel_video_button"
+            android:layout_width="78dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:scaleType="fitCenter"
+            android:text="iptal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/video_layout_bottom"
+            app:layout_constraintStart_toStartOf="@+id/video_layout_bottom" />
+
+        <Button
+            android:id="@+id/send_video_button"
+            android:layout_width="82dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:scaleType="fitCenter"
+            android:text="gönder"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/video_layout_bottom"
+            app:layout_constraintEnd_toEndOf="@+id/video_layout_bottom" />
+
+        <Button
+            android:id="@+id/start_video_button"
+            android:layout_width="81dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="24dp"
+            android:scaleType="fitCenter"
+            android:text="kaydet"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/video_layout_bottom"
+            app:layout_constraintEnd_toEndOf="@+id/video_layout_bottom"
+            app:layout_constraintStart_toStartOf="@+id/video_layout_bottom" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="423dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/message_field"
+            android:layout_width="313dp"
+            android:layout_height="386dp"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:hint="WRITE YOUR MESSAGE"
+            android:inputType="textMultiLine"
+            android:maxLength="150"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:textAlignment="center"
+            android:textCursorDrawable="@null"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <Button
+            android:id="@+id/send_text_button"
+            android:layout_width="85dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            android:text="gönder"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/message_field"
+            app:layout_constraintEnd_toEndOf="@+id/message_field" />
+
+        <Button
+            android:id="@+id/cancel_text_button"
+            android:layout_width="74dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            android:text="iptal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/message_field"
+            app:layout_constraintStart_toStartOf="@+id/message_field" />
+
+        <Button
+            android:id="@+id/listen_text_button"
+            android:layout_width="73dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            android:text="dinle"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/message_field"
+            app:layout_constraintTop_toTopOf="@+id/message_field" />
+
+        <TextView
+            android:id="@+id/remaining_letter_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="0 / 150"
+            app:layout_constraintBottom_toBottomOf="@+id/message_field"
+            app:layout_constraintEnd_toEndOf="@+id/message_field"
+            app:layout_constraintStart_toStartOf="@+id/message_field" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/lock_layout"
         android:layout_width="348dp"
         android:layout_height="401dp"
@@ -14,6 +259,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +386,7 @@
                 app:layout_constraintStart_toEndOf="@+id/pad_8"
                 app:layout_constraintTop_toBottomOf="@+id/pad_6" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/pad_10"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -153,7 +399,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pad_9"
                 app:srcCompat="@color/colorAccent" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/pad_11"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -187,13 +433,67 @@
             app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/lock_button"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/navigation_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/locker_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/text_message_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitCenter"
+            android:text="yazılı mesaj"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/audio_message_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/audio_message_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitCenter"
+            android:text="sesli mesaj"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/video_message_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitCenter"
+            android:text="görüntülü mesaj"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/audio_message_button"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/locker_button"
         android:layout_width="140dp"
         android:layout_height="76dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
         android:scaleType="fitCenter"
+        android:text="kilit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@color/colorAccent" />

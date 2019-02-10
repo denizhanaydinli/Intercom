@@ -1,15 +1,14 @@
-package com.denizhan.intercom.ExternalTools;
+package com.denizhan.intercom.Interaction;
 
 import android.animation.ObjectAnimator;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import com.denizhan.intercom.ExternalTools.InstanceHolder;
 import com.denizhan.intercom.R;
 //Denizhan
-public class Locker {
-
-    private InstanceHolder IH;
+public class Locker extends Panel {
 
     private ObjectAnimator lock_animation;
 
@@ -17,19 +16,22 @@ public class Locker {
     private String current_entered_password = "";
     private boolean locked = true;
 
-    private ImageButton lock_button;
+    private Button lock_button;
     private EditText password_field;
 
     public Locker(String password, InstanceHolder ih){
+        super(ih, R.id.lock_layout);
         this.password = password;
-        this.IH = ih;
-        setViews();
     }
 
-    public void setViews(){
-        lock_button = IH.activityInstance.findViewById(R.id.lock_button);
+    @Override
+    protected void setViews(){
+        lock_button = IH.activityInstance.findViewById(R.id.locker_button);
         password_field = IH.activityInstance.findViewById(R.id.password_field);
+    }
 
+    @Override
+    protected void setListeners() {
         View.OnClickListener keypad_listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,16 +94,7 @@ public class Locker {
 
     }
 
-    public boolean isCorrect(String password){
-        if(password.equals(this.password)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     public void changePassword(String password){
         this.password = password;
     }
-
 }
