@@ -31,6 +31,26 @@ public class CustomVideoPlayer implements ActivityMediaInteractionInterface {
         }
 
     }
+    public void prepare(String path) { // istenilen dosyayı oynat
+        try {
+            this.media_player.setDisplay(this.surface_view.getHolder()); // videonun oynatılacağı surface
+            this.media_player.setDataSource(path);
+            this.media_player.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void prepare(String path, boolean looping) { // istenilen dosyayı oynat
+        try {
+            this.media_player.setDisplay(this.surface_view.getHolder()); // videonun oynatılacağı surface
+            this.media_player.setDataSource(path);
+            this.media_player.setLooping(looping);
+            this.media_player.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void start() {
@@ -43,7 +63,7 @@ public class CustomVideoPlayer implements ActivityMediaInteractionInterface {
 
     @Override
     public void stop() {
-        if(this.media_player != null){
+        if(this.media_player != null && this.playing == true){
             this.media_player.stop();
             this.playing = false;
         }
