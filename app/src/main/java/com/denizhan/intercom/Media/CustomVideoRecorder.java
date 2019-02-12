@@ -83,6 +83,7 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
             }
             this.camera = Camera.open(1); // ön kamerayı aç
             this.camera.setPreviewDisplay(this.surface_view.getHolder()); // oynatma yüzeyini belirle
+            this.camera.setPreviewCallback(this);
             this.camera.startPreview(); // previewi başlat
             this.previewing = true;
         } catch (IOException e) {
@@ -103,5 +104,9 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface{
     }
     public boolean isRecording(){
         return this.recording; // kayıt yapıyor mu yapmıyor mu anlamak için boolean döndür
+    }
+    //@Override
+    public void onPreviewFrame(byte[] data, Camera camera) {
+
     }
 }
