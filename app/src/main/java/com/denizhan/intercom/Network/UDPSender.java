@@ -26,7 +26,9 @@ public class UDPSender {
     public UDPSender(String ipAdress){
          try {
             sendingSocket = new DatagramSocket(4005);
-            local_address = InetAddress.getByName(ipAdress);
+            //byte[] ipAddr = new byte[]{127, 0, 0, 1};
+             // InetAddress addr = InetAddress.getByAddress(ipAddr);
+            local_address = InetAddress.getByName(ipAdress);//karsi tarafin ipsi
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {

@@ -6,6 +6,13 @@ package com.denizhan.intercom.Network;
     almaya yaracak class.
 */
 
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Arrays;
+import java.util.Objects;
+
 public class NetworkConnector {
 
     private UDPSender udpSender;
@@ -83,6 +90,7 @@ public class NetworkConnector {
 
     public enum COMMANDS
     {
+
             SEND_AUDIO("send_audio"),
             END_AUDIO("end_audio"),
 
@@ -93,16 +101,33 @@ public class NetworkConnector {
 
             OPEN_LOCK("open_lock");
 
+            REAL_TIME_BEGIN("real_time_begin"),
+            REAL_TIME_END("real_time_end"),
+
+            RING("ring_begin"),
+
+            TEXT("text_begin"),
+            AUDIO("audio_begin"),
+            VIDEO_BEGIN("video_begin"),
+            VIDEO_END("video_end");
+
             private final String type;
             COMMANDS(String str) {
+
                 type = str;
             }
+
 
             public String toString() {
                 return this.type;
             }
-    }
+        }
 
 
 
+}
+public class ByteSplitter{
+
+    //bytelari parcalara ayirma islemi yapacak
+  //  Arrays.copyOfRange();
 }
