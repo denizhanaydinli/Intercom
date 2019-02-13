@@ -8,7 +8,7 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
 
     private MediaPlayer player; // Android'in kendi medya oynatıcısı
     public boolean playing; // Oynuyor mu oynamıyor mu anlamak için boolean
-    private String FILE_PATH = "/storage/emulated/0/sample.3gp"; // Dosya yolu
+    private String FILE_PATH = "/storage/emulated/0/sample0.3gp"; // Dosya yolu
 
     public CustomAudioPlayer()
     {

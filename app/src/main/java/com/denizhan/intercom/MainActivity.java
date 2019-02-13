@@ -1,7 +1,11 @@
 package com.denizhan.intercom;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.denizhan.intercom.ExternalTools.InstanceHolder;
 import com.denizhan.intercom.ExternalTools.PermissionController;
 import com.denizhan.intercom.Interaction.Camera;
@@ -11,7 +15,7 @@ import com.denizhan.intercom.Interaction.NavigationPanel;
 import com.denizhan.intercom.Interaction.Typewriter;
 
 //Denizhan
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     private InstanceHolder IH;
 
@@ -21,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private Mic mic;
     private Camera camera;
 
+    public PermissionController permissionController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.IH = new InstanceHolder( MainActivity.this);
+        permissionController = new PermissionController(this.IH);
         initExternalTools();
     }
 
@@ -33,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         locker = new Locker("123", this.IH);
         locker.show();
 
-        typewriter = new Typewriter(this.IH);
+        typewriter = new Typewriter(this.IH, 100);
         typewriter.hide();
 
         mic = new Mic(this.IH);
@@ -46,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
         navigationPanel.show();
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        permissionController.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     protected void onDestroy() {
