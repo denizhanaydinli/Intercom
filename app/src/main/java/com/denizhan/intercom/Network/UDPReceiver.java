@@ -25,7 +25,7 @@ public class UDPReceiver {
 
         public UDPReceiver(){
             try {
-                receivingSocket = new DatagramSocket(4445);
+                receivingSocket = new DatagramSocket(4445);//netstat -ano
                 receivingPacket = new DatagramPacket(receivingBytes, receivingBytes.length);
             } catch (SocketException e) {
                 e.printStackTrace();

@@ -113,6 +113,7 @@ public class NetworkConnector {
 
             private final String type;
             COMMANDS(String str) {
+
                 type = str;
             }
 
@@ -124,4 +125,9 @@ public class NetworkConnector {
 
 
 
+}
+public class ByteSplitter{
+
+    //bytelari parcalara ayirma islemi yapacak
+  //  Arrays.copyOfRange();
 }
