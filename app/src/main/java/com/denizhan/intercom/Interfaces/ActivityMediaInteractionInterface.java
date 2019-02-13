@@ -6,11 +6,14 @@ package com.denizhan.intercom.Interfaces;
     gerçek zamanlı ses ve görüntü classlarını yazanların implement etmesi gerekmektedir.
 */
 
+import android.hardware.Camera;
+
 public interface ActivityMediaInteractionInterface {
 
     public void prepare();
     public void start();
     public void stop();
     public void destroy();
+    //public void onPreviewFrame(byte[] data, Camera camera);
 
 }
