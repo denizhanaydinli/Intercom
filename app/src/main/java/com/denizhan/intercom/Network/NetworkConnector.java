@@ -83,7 +83,6 @@ public class NetworkConnector {
 
     public enum COMMANDS
     {
-
             SEND_AUDIO("send_audio"),
             END_AUDIO("end_audio"),
 
@@ -99,11 +98,10 @@ public class NetworkConnector {
                 type = str;
             }
 
-
             public String toString() {
                 return this.type;
             }
-        }
+    }
 
 
 

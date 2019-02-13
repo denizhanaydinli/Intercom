@@ -3,6 +3,7 @@ package com.denizhan.intercom;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.denizhan.intercom.ExternalTools.InstanceHolder;
+import com.denizhan.intercom.ExternalTools.PermissionController;
 import com.denizhan.intercom.Interaction.Camera;
 import com.denizhan.intercom.Interaction.Locker;
 import com.denizhan.intercom.Interaction.Mic;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.IH = new InstanceHolder( MainActivity.this);
         initExternalTools();
-
     }
 
     private void initExternalTools() {
