@@ -4,13 +4,16 @@ package com.denizhan.intercom.Media;
     Yazacak Olan: Buğra
     Açıklama: 3gp formatında video kaydedici
 */
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.view.SurfaceView;
 import com.denizhan.intercom.Interfaces.ActivityMediaInteractionInterface;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 
 public class CustomVideoRecorder implements ActivityMediaInteractionInterface, Camera.PreviewCallback{
 
@@ -21,6 +24,7 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface, C
     private boolean recording = false;
     private int index = -1;
     private String path = "/storage/emulated/0/video" + index + ".mp4"; // videonun dosya ismi
+    public static byte[] CAMERA_DATA = new byte[0];
 
     public CustomVideoRecorder(SurfaceView surfaceview){
         this.media_recorder = new MediaRecorder();
@@ -85,6 +89,10 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface, C
                 stop();
             }
             this.camera = Camera.open(1); // ön kamerayı aç
+            Camera.Parameters parameters = camera.getParameters();
+            parameters.setPreviewSize(320, 240);
+            camera.setParameters(parameters);
+            camera.setDisplayOrientation(90);
             this.camera.setPreviewDisplay(this.surface_view.getHolder()); // oynatma yüzeyini belirle
             this.camera.setPreviewCallback(this);
             this.camera.startPreview(); // previewi başlat
@@ -119,9 +127,11 @@ public class CustomVideoRecorder implements ActivityMediaInteractionInterface, C
         setPath("/storage/emulated/0/video" + this.index + ".mp4");
     }
 
-
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-
+        YuvImage yuv_image = new YuvImage(data, ImageFormat.NV21, 320, 240, null);
+        ByteArrayOutputStream byte_array_output_stream = new ByteArrayOutputStream();
+        yuv_image.compressToJpeg(new Rect(0, 0, 320, 240), 100, byte_array_output_stream);
+        CustomVideoRecorder.CAMERA_DATA = byte_array_output_stream.toByteArray();
     }
 }
