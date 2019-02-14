@@ -87,7 +87,11 @@ public class NetworkConnector {
      //alma islemleri yapilacak
         byte [] data = udpReceiver.receive();
     }
+    public class ByteSplitter{
 
+        //bytelari parcalara ayirma islemi yapacak
+        //  Arrays.copyOfRange();
+    }
     public enum COMMANDS
     {
 
@@ -99,7 +103,7 @@ public class NetworkConnector {
             SEND_VIDEO("send_video"),
             END_VIDEO("end_video"),
 
-            OPEN_LOCK("open_lock");
+            OPEN_LOCK("open_lock"),
 
             REAL_TIME_BEGIN("real_time_begin"),
             REAL_TIME_END("real_time_end"),
@@ -112,22 +116,19 @@ public class NetworkConnector {
             VIDEO_END("video_end");
 
             private final String type;
+
             COMMANDS(String str) {
 
                 type = str;
             }
-
-
-            public String toString() {
-                return this.type;
+            public String toString()
+            {
+                   return this.type;
             }
-        }
 
 
 
-}
-public class ByteSplitter{
+    }
 
-    //bytelari parcalara ayirma islemi yapacak
-  //  Arrays.copyOfRange();
+
 }
