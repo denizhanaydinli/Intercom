@@ -66,4 +66,16 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
         RECORDING_INDEX = RECORDING_INDEX + 1; // Bir sonraki kayda geç
         setFilePath("/storage/emulated/0/sample" + RECORDING_INDEX + ".3gp"); // Dosya yolunu değiştir
     }
+
+    public String getPath(){
+        return FILE_PATH;
+    }
+
+    public boolean isRecording(){
+        return recording;
+    }
+
+    public int getRecordingIndex(){
+        return RECORDING_INDEX;
+    }
 }
