@@ -87,6 +87,19 @@ public class NetworkConnector {
      //alma islemleri yapilacak
         byte [] data = udpReceiver.receive();
     }
+    private byte[] fileToByte(File file)
+    {
+        byte[] file_data = new byte[(int) file.length()];
+        //gelen dosyayi bytelara ata..
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            fis.read(file_data);
+            fis.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return file_data;
+    }
     public class ByteSplitter{
 
         //bytelari parcalara ayirma islemi yapacak
