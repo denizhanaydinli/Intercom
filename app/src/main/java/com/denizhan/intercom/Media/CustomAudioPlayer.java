@@ -8,7 +8,8 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
 
     private MediaPlayer player; // Android'in kendi medya oynatıcısı
     public boolean playing; // Oynuyor mu oynamıyor mu anlamak için boolean
-    private String FILE_PATH = "/storage/emulated/0/sample0.3gp"; // Dosya yolu
+    private int PLAYING_INDEX = 0; // Oynatma indexi
+    private String FILE_PATH = "/storage/emulated/0/sample" + PLAYING_INDEX + ".3gp"; // Dosya yolu
 
     public CustomAudioPlayer()
     {
@@ -50,8 +51,9 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
         playing = false;
     }
 
-    public void setFilePath(String path)
+    public void setFileIndex(int index)
     {
-        FILE_PATH = path; // Dosya yolunu değiştir
+        PLAYING_INDEX = index; // İstenilen indexi belirle
+        FILE_PATH = "/storage/emulated/0/sample" + PLAYING_INDEX + ".3gp"; // İstenilen indexteki dosya yolunu al
     }
 }
