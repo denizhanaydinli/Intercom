@@ -57,6 +57,10 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
         playing = false;
     }
 
+    public void reset(){
+        player.reset();
+    }
+
     public void setFileIndex(int index)
     {
         PLAYING_INDEX = index; // İstenilen indexi belirle

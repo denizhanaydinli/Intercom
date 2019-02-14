@@ -56,6 +56,10 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
         recording = false;
     }
 
+    public void reset(){
+        recorder.reset(); // Bu method çağırılırsa sanki constructor yeni çağırılmış durumuna gelir
+    }
+
     public void setFilePath(String path)
     {
         FILE_PATH = path; // Dosya yolunu değiştir
@@ -67,15 +71,19 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
         setFilePath("/storage/emulated/0/sample" + RECORDING_INDEX + ".3gp"); // Dosya yolunu değiştir
     }
 
-    public String getPath(){
+    public String getPath(){ // Kaydedilen dosya yolunu söyle
         return FILE_PATH;
     }
 
-    public boolean isRecording(){
+    public boolean isRecording(){ // Kayıt durumunu söyle
         return recording;
     }
 
-    public int getRecordingIndex(){
+    public int getRecordingIndex(){ // Kaçıncı kayıtta olduğunu söyle
         return RECORDING_INDEX;
+    }
+
+    public int getAmplitude(){
+        return recorder.getMaxAmplitude(); // Kayıt sırasında sesin yüksekliğini al
     }
 }
