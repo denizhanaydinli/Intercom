@@ -10,12 +10,22 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
     private boolean recording; // Kaydedip kaydetmediğini anlamak için boolean
     private int RECORDING_INDEX = -1; // Yeni kayıtta dosya yolunu değiştirmek için index
     private String FILE_PATH = "/storage/emulated/0/sample" + RECORDING_INDEX + ".3gp"; // Dosya yolu
-    private ProgressBar amplitudebar;
-    private Thread amplitudethread;
-    private Runnable amplituderunnable;
+    private ProgressBar amplitudebar; // Activity den alınacak progressbar
+    private Thread amplitudethread; // Progressbarın animasyonu için kullanılacak thread
+    private Runnable amplituderunnable; // Thread için kullanılacak method içeriğini tutacak Runnable
 
     public CustomAudioRecorder()
     {
+        init();
+    }
+
+    public CustomAudioRecorder(ProgressBar progressbar)
+    {
+        init();
+        setProgressBar(progressbar);
+    }
+
+    private void init(){
         nextRecord(); // Her kayıtta dosya yolunu güncelle
         recorder = new MediaRecorder(); // MediaRecorder objesini oluştur
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC); // Medya girişi olarak mikrofonu seç
@@ -24,6 +34,7 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
         // (Wideband 16 bin Hz'de örnekleme alıyor).
         // Dosya boyutunu küçük tutmak için narrowband kullandım.
     }
+
 
     @Override
     public void prepare()
@@ -109,14 +120,20 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
         amplitudebar = progressbar; // Uygulama içindeki verilen progressbarı kullan
         amplitudebar.setMax(6500); // Progressbar için maximum değeri ayarla
         amplitudebar.setProgress(0); // Kayıt başlangıcı progressbarı sıfırla
-        amplituderunnable = new Runnable() {
+        amplituderunnable = new Runnable()
+        {
             @Override
-            public void run() {
-                while(recording){
-                    try {
+            public void run()
+            {
+                while(recording)
+                {
+                    try
+                    {
                         amplitudebar.setProgress(recorder.getMaxAmplitude()); // Kayıt sırasında progressbarın değerini güncelle
                         Thread.sleep(50); // 50 milisaniye aralıklarla döngüyü durdur. Eğer çok hızlı olursa animasyon bozuluyor
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e)
+                    {
                         e.printStackTrace();
                     }
                 }
