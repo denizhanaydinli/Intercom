@@ -67,15 +67,18 @@ public class CustomAudioPlayer implements ActivityMediaInteractionInterface {
         FILE_PATH = "/storage/emulated/0/sample" + PLAYING_INDEX + ".3gp"; // İstenilen indexteki dosya yolunu al
     }
 
-    public String getPath(){
+    public String getPath()
+    {
         return FILE_PATH;
     }
 
-    public boolean isPlaying(){
+    public boolean isPlaying()
+    {
         return playing;
     }
 
-    public int getPlayingIndex(){
+    public int getPlayingIndex()
+    {
         return PLAYING_INDEX;
     }
 }
