@@ -12,6 +12,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import com.denizhan.intercom.Network.Tools.COMMANDS;
+
 public class UDPSender {
 
     // Alici adresi
@@ -47,4 +49,14 @@ public class UDPSender {
             // OlaGan hata paketin veri boyutunun udp buyuk olması
            }
     }
+    public void sendCommand(COMMANDS command){
+        sendingPacket = new DatagramPacket(command.toString().getBytes(), command.toString().getBytes().length, local_address, 4004); // paketi veri boyutuna göre güncelle
+        try {
+            sendingSocket.send(sendingPacket); // sokete veriyi gönder
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Olağan hata paketin veri boyutunun udp büyük olması
+        }
+    }
+
 }

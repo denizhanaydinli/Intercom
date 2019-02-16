@@ -7,10 +7,10 @@ public class MessageQueue {
 
     private DateQueue dateQueue;
 
-    Queue<String> ringNotificationQueue = new LinkedList<>();
-    Queue<String> textMessageQueue = new LinkedList<>();
-    Queue<String> audioMessageQueue = new LinkedList<>();
-    Queue<String> videoMessageQueue = new LinkedList<>();
+    public Queue<String> ringNotificationQueue = new LinkedList<>();
+    public Queue<String> textMessageQueue = new LinkedList<>();
+    public Queue<String> audioMessageQueue = new LinkedList<>();
+    public Queue<String> videoMessageQueue = new LinkedList<>();
 
     public MessageQueue(){
         this.dateQueue = new DateQueue();

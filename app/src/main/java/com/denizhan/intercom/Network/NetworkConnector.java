@@ -8,8 +8,12 @@ package com.denizhan.intercom.Network;
 
 import android.util.Log;
 
+import com.denizhan.intercom.Network.Tools.COMMANDS;
+import com.denizhan.intercom.Network.Tools.MessageQueue;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.InterruptedException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
@@ -27,38 +31,49 @@ public class NetworkConnector {
     private Runnable sendingRunnable, receivingRunnable;
     private boolean sending,  receiving;
 
+    private boolean SEND_REALTIME_DATA = false;
+    private boolean SEND_UPDATES = false;
+    private MessageQueue messageQueue;
+
     // baglanilacak ip adresini al
 
     private NetworkConnector(String ipAdress){
         this.udpSender = new UDPSender(ipAdress);
         this.udpReceiver = new UDPReceiver();
         initialize();
+        messageQueue = new MessageQueue();
     }
 
-    private void initialize(){
-        // veri gonderme metodunu sec
+    public void initialize(){
+        // veri gönderme metodunu seç
         sendingRunnable = new Runnable() {
-
             @Override
             public void run() {
-                while(sending){
-                    send();
+                try {
+                    while(sending){
+                        send();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         };
         sendingThread = new Thread(sendingRunnable);
-        // veri alma metodunu sec
+        // veri alma metodunu seç
         receivingRunnable = new Runnable() {
             @Override
-            public void run() {
-                while(receiving){
-                    receive();
+            public void run()  {
+                try {
+                    while(receiving){
+                        receive();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         };
         receivingThread = new Thread(receivingRunnable);
     }
-
     private void start(){
         //veri gondermeye basla
         sending = true;
@@ -82,10 +97,28 @@ public class NetworkConnector {
         receivingThread = null;
     }
 
-    private void send(){
+    private void send()throws InterruptedException{
       //buralara gonderme yapilacak
         //data byte ların arraylik eleman olarak gonderilmelerini sagliycak
-        udpSender.send(new byte[0]);
+        if (SEND_REALTIME_DATA) {
+            // gerçek zamanlı görüntü ve video gönder
+        }
+
+        if(SEND_UPDATES) {
+            while(!messageQueue.ringNotificationQueue.isEmpty()) {
+                // queue boşalana kadar updateleri gönder
+            }
+            while(!messageQueue.textMessageQueue.isEmpty()){
+                // queue boşalana kadar updateleri gönder
+            }
+            while(!messageQueue.audioMessageQueue.isEmpty()){
+                // queue boşalana kadar updateleri gönder
+            }
+            while(!messageQueue.videoMessageQueue.isEmpty()){
+                // queue boşalana kadar updateleri gönder
+            }
+            SEND_UPDATES = false;
+        }
     }
 
     private void receive(){
