@@ -82,6 +82,10 @@ public class CustomAudioRecorder implements ActivityMediaInteractionInterface {
 
     public void reset(){
         recorder.reset(); // Bu method çağırılırsa sanki constructor yeni çağırılmış durumuna gelir
+        recording = false;
+        if(amplitudebar != null) { // Eğer progressbar verilmiş ise animasyonu bitir
+            amplitudethread = null;
+        }
     }
 
     public void setFilePath(String path)
