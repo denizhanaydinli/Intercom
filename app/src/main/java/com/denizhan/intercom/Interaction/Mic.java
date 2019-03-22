@@ -1,11 +1,5 @@
 package com.denizhan.intercom.Interaction;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -66,20 +60,24 @@ public class Mic extends Panel {
         send_audio_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(customAudioPlayer.playing){
+                if(customAudioPlayer.isPlaying()){
                     customAudioPlayer.stop();
                 }
                 audio_remaining_time_bar.setVisibility(View.INVISIBLE);
                 record_audio_button.setVisibility(View.VISIBLE);
                 delete_audio_button.setVisibility(View.INVISIBLE);
                 send_audio_button.setVisibility(View.INVISIBLE);
+
+                String path = "/storage/emulated/0/sample" + "0" + ".3gp";
+                IH.activityInstance.networkConnector.messageQueue.addAudioMessage(path);
+
             }
         });
 
         stop_audio_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(customAudioRecorder.recording){
+                if(customAudioRecorder.isRecording()){
                     customAudioRecorder.stop();
                     customAudioRecorder.destroy();
                     toolSet = false;
@@ -89,7 +87,7 @@ public class Mic extends Panel {
                     delete_audio_button.setVisibility(View.VISIBLE);
                     stop_audio_button.setVisibility(View.INVISIBLE);
 
-                    customAudioPlayer.prepare();
+                    customAudioPlayer.prepare(true);
                     customAudioPlayer.start();
                 }
             }
@@ -98,7 +96,7 @@ public class Mic extends Panel {
         delete_audio_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(customAudioPlayer.playing){
+                if(customAudioPlayer.isPlaying()){
                     customAudioPlayer.stop();
                 }
                 audio_remaining_time_bar.setVisibility(View.INVISIBLE);
@@ -143,8 +141,8 @@ public class Mic extends Panel {
         if(toolSet){
             return;
         }
-        customAudioRecorder = new CustomAudioRecorder();
-        customAudioPlayer = new CustomAudioPlayer();
+        customAudioRecorder = new CustomAudioRecorder(audio_amplitude_progress_bar);
+        customAudioPlayer = new CustomAudioPlayer(audio_remaining_time_bar);
         toolSet = true;
     }
 }

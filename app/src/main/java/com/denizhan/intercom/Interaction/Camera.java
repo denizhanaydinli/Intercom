@@ -1,15 +1,11 @@
 package com.denizhan.intercom.Interaction;
 
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-
 import com.denizhan.intercom.ExternalTools.InstanceHolder;
 import com.denizhan.intercom.ExternalTools.PermissionController;
-import com.denizhan.intercom.Media.CustomAudioPlayer;
-import com.denizhan.intercom.Media.CustomAudioRecorder;
 import com.denizhan.intercom.Media.CustomVideoPlayer;
 import com.denizhan.intercom.Media.CustomVideoRecorder;
 import com.denizhan.intercom.R;
@@ -103,6 +99,10 @@ public class Camera extends Panel {
                 delete_video_button.setVisibility(View.INVISIBLE);
                 send_video_button.setVisibility(View.INVISIBLE);
                 record_video_button.setVisibility(View.VISIBLE);
+
+                String path = "/storage/emulated/0/video" + "0" + ".mp4";
+                IH.activityInstance.networkConnector.messageQueue.addVideoMessage(path);
+
             }
         });
 

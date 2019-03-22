@@ -518,4 +518,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/ring_button"
+        android:layout_width="140dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitCenter"
+        android:text="ZİL"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@color/colorAccent" />
 </android.support.constraint.ConstraintLayout>

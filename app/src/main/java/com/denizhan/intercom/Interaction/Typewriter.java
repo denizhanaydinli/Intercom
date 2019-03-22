@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.denizhan.intercom.ExternalTools.InstanceHolder;
 import com.denizhan.intercom.ExternalTools.T2S;
+import com.denizhan.intercom.Network.NetworkConnector;
 import com.denizhan.intercom.R;
 
 import org.w3c.dom.Text;
@@ -70,6 +71,7 @@ public class Typewriter extends Panel{
         send_text_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                IH.activityInstance.networkConnector.messageQueue.addTextMessage(message_field.getText().toString());
                 message_field.setText("");
                 t2s.stop();
             }
