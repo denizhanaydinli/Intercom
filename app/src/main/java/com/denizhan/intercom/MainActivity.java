@@ -13,11 +13,15 @@ import com.denizhan.intercom.Interaction.Locker;
 import com.denizhan.intercom.Interaction.Mic;
 import com.denizhan.intercom.Interaction.NavigationPanel;
 import com.denizhan.intercom.Interaction.Typewriter;
+import com.denizhan.intercom.Network.NetworkConnector;
+import com.denizhan.intercom.Network.Tools.COMMANDS;
 
 //Denizhan
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
 
     private InstanceHolder IH;
+
+    public NetworkConnector networkConnector;
 
     private NavigationPanel navigationPanel;
     private Locker locker;
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     }
 
     private void initExternalTools() {
+        networkConnector = new NetworkConnector("192.168.43.1");
+        networkConnector.start();
+
         locker = new Locker("123", this.IH);
         locker.show();
 

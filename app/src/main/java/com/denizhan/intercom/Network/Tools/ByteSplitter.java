@@ -2,7 +2,7 @@ package com.denizhan.intercom.Network.Tools;
 
 import java.util.Arrays;
 
-public class ByteSplitter{
+public class ByteSplitter {
 
     //bytelari parcalara ayirma islemi yapacak
     //  Arrays.copyOfRange();
@@ -25,7 +25,12 @@ public class ByteSplitter{
                 byte[] data_piece = Arrays.copyOfRange(data, this.INDEX, this.INDEX + this.PIECE_SIZE);
                 this.INDEX += this.PIECE_SIZE;
                 this.REMAINING -= this.PIECE_SIZE;
-                return data_piece; // parça boyutu kadar olan datayı ver
+                return data_piece; // parÃ§a boyutu kadar olan datayÄ± ver
+            }else{
+                byte[] data_piece = Arrays.copyOfRange(data, this.INDEX, this.INDEX + this.REMAINING);
+                this.INDEX += this.REMAINING;
+                this.REMAINING = 0;
+                return data_piece; // parÃ§a boyutu kadar olan datayÄ± ver
             }
         }
         return null;

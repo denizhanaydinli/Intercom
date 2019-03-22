@@ -3,25 +3,24 @@ package com.denizhan.intercom.Network.Tools;
 public enum COMMANDS
 {
 
-    SEND_AUDIO("send_audio"),
-    END_AUDIO("end_audio"),
+    IDLE("idle"),
 
-    CHECK_UPDATES("check_updates"),
+    UNLOCK_BEGIN("unlock_begin"),
 
-    SEND_VIDEO("send_video"),
-    END_VIDEO("end_video"),
+    RING_BEGIN("ring_begin"),
 
-    OPEN_LOCK("open_lock"),
+    REAL_TIME_VIDEO_BEGIN("real_time_video_begin"),
 
-    REAL_TIME_BEGIN("real_time_begin"),
-    REAL_TIME_END("real_time_end"),
+    REAL_TIME_AUDIO_BEGIN("real_time_audio_begin"),
 
-    RING("ring_begin"),
-
-    TEXT("text_begin"),
-    AUDIO("audio_begin"),
     VIDEO_BEGIN("video_begin"),
-    VIDEO_END("video_end");
+    VIDEO_END("video_end"),
+
+    AUDIO_BEGIN("audio_begin"),
+    AUDIO_END("audio_end"),
+
+    TEXT_BEGIN("text_begin"),
+    TEXT_END("text_end");
 
     private final String type;
 
@@ -29,12 +28,45 @@ public enum COMMANDS
 
         type = str;
     }
+
     public String toString()
     {
         return this.type;
     }
 
+    public boolean eqauls(COMMANDS command){
+        if(this.type.equals(command.toString())){
+            return true;
+        }
 
+        return false;
+    }
+
+    public boolean eqauls(String command){
+        if(this.type.equals(command)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean compare(String str, COMMANDS command){
+        if(str.equals(command.toString())){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean compare(COMMANDS command, String str){
+        if(str.equals(command.toString())){
+            return true;
+        }
+        return false;
+    }
+
+    public byte[] getBytes(){
+        return this.type.getBytes();
+    }
 
 }
 
