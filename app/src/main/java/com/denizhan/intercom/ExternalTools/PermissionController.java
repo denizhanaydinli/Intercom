@@ -7,7 +7,7 @@ import android.util.Log;
 
 /*
     Yazar: Gizem
-    Açıklama: Kullanıcıdan alınacak kamera kullanma, ses kaydetme ve depolama izinlerini kontrol edecek class.
+    AÃ§Ä±klama: KullanÄ±cÄ±dan alÄ±nacak kamera kullanma, ses kaydetme ve depolama izinlerini kontrol edecek class.
 */
 
 public class PermissionController {
