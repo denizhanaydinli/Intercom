@@ -30,8 +30,8 @@ public class UDPSender {
             sendingSocket = new DatagramSocket(4005);
             //byte[] ipAddr = new byte[]{127, 0, 0, 1};
             // InetAddress addr = InetAddress.getByAddress(ipAddr);
-            //local_address = InetAddress.getByName("192.168.43.165");//karsi tarafin ipsi
-            local_address = InetAddress.getByName("192.168.60.42");//karsi tarafin ipsi
+            local_address = InetAddress.getByName("192.168.43.165");//karsi tarafin ipsi
+            //local_address = InetAddress.getByName("192.168.60.42");//karsi tarafin ipsi
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (SocketException e) {
